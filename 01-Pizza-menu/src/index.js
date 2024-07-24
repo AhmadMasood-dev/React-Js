@@ -91,7 +91,6 @@ function Menu() {
 }
 
 function Pizza({ pizzaObj }) {
-  // if (pizzaObj.soldOut) return null;
   return (
     <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
@@ -106,18 +105,21 @@ function Pizza({ pizzaObj }) {
 
 function Footer() {
   const hour = new Date().getHours();
+  console.log(hour);
   const openHour = 12;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
-  // if(hour>=openHour&&hour<=closeHour) alert("We'er currently open")
-  // else alert("We'er currently closed")
+
   return (
     <footer className="footer">
-      {isOpen ? <Order closeHour={closeHour} openHour={openHour} /> : null}
+      {isOpen ? (
+        <Order closeHour={closeHour} openHour={openHour} />
+      ) : (
+        "We'er currently closed."
+      )}
     </footer>
   );
-  // React.createElement('footer',null,'were currently')
 }
 function Order({ closeHour, openHour }) {
   return (
@@ -125,7 +127,7 @@ function Order({ closeHour, openHour }) {
       <p>
         We're open {openHour}:00 to {closeHour}:00.Come visit us or order online
       </p>
-      <button className="order">Order</button>
+      <button className="btn">Order</button>
     </div>
   );
 }
@@ -137,7 +139,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
