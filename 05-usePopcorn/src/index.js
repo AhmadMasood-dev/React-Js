@@ -19,5 +19,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-{/* <StartRating maxRating={5} defaultRating={3} /> */}
