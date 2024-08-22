@@ -1,6 +1,6 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import styles from "./City.module.css";
-import Button from "./Button";
+import Button from "./generic/Button";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
