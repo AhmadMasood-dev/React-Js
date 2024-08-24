@@ -2,8 +2,11 @@ import Spinner from "./Spinner";
 import Message from "./Message";
 import styles from "./CountriesList.module.css";
 import CountryItem from "./CountryItem";
+import { useCities } from "../Contexts/CitiesContext";
 // import PropTypes from "prop-types";
-function countryList({ cities, isLoading }) {
+function countryList() 
+{
+const { cities, isLoading } = useCities();
   if (isLoading) return <Spinner />;
   if (!cities.length)
     return <Message message="Add your First city by clickon the map" />;
