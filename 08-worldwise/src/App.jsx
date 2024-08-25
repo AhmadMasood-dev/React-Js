@@ -13,7 +13,6 @@ import Form from "./components/Form";
 
 import { CitiesProvider } from "./Contexts/CitiesContext";
 
-
 function App() {
   return (
     <CitiesProvider>
@@ -21,7 +20,7 @@ function App() {
         <Routes>
           <Route index element={<Homepage />} />
           <Route path="pricing" element={<Pricing />} />
-          <Route path="product" element={<Product />} /> 
+          <Route path="product" element={<Product />} />
           <Route path="login" element={<Login />} />
 
           <Route path="app" element={<AppLayout />}>
