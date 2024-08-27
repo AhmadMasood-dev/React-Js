@@ -27,7 +27,7 @@ function AuthProvider({ children }) {
   const [{ user, isAuthentical }, dispatch] = useReducer(reducer, initialState);
 
   function login(email, password) {
-    if (email.FAKE_USER.email && password === FAKE_USER.password)
+    if (email === FAKE_USER.email && password === FAKE_USER.password)
       dispatch({ type: "login", payload: FAKE_USER });
   }
 
@@ -36,7 +36,7 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={(user, isAuthentical, login, logout)}>
+    <AuthContext.Provider value={{ user, isAuthentical, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
@@ -45,5 +45,6 @@ function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined)
     throw new Error("AuthContext was used outside the AuthP rovider");
+  return context;
 }
 export { AuthProvider, useAuth };
