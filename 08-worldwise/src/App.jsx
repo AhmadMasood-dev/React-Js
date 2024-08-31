@@ -1,19 +1,38 @@
+import { AuthProvider } from "./Contexts/FakeAuthContext";
+import { CitiesProvider } from "./Contexts/CitiesContext";
+
+import ProtectedRoutes from "./Pages/ProtectedRoutes";
+import { lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import Homepage from "./Pages/Homepage";
-import Pricing from "./Pages/Pricing";
-import Product from "./Pages/Product";
-import Login from "./Pages/Login";
-import PageNotFound from "./Pages/PageNotFound";
-import AppLayout from "./Pages/AppLayout";
-import CityList from "./components/CityList";
-import CountriesList from "./components/CountriesList";
-import City from "./components/City";
-import Form from "./components/Form";
+// import AppLayout from "./Pages/AppLayout";
+// import Homepage from "./Pages/Homepage";
+// import Pricing from "./Pages/Pricing";
+// import Product from "./Pages/Product";
+// import Login from "./Pages/Login";
+// import PageNotFound from "./Pages/PageNotFound";
+// import CountriesList from "./components/CountriesList";
+// import CityList from "./components/CityList";
+// import City from "./components/City";
+// import Form from "./components/Form";
 
-import { CitiesProvider } from "./Contexts/CitiesContext";
-import { AuthProvider } from "./Contexts/FakeAuthContext";
-import ProtectedRoutes from "./Pages/ProtectedRoutes";
+const Homepage = lazy(() => import("./Pages/Homepage"));
+const Pricing = lazy(() => import("./Pages/Pricing"));
+
+const Product = lazy(() => import("./Pages/Product"));
+
+const Login = lazy(() => import("./Pages/Login"));
+
+const PageNotFound = lazy(() => import("./Pages/PageNotFound"));
+
+const AppLayout = lazy(() => import("./Pages/AppLayout"));
+
+const CityList = lazy(() => import("./components/CityList"));
+
+const CountriesList = lazy(() => import("./components/CountriesList"));
+const City = lazy(() => import("./components/City"));
+
+const Form = lazy(() => import("./components/Form"));
 
 function App() {
   return (
