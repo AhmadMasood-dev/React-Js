@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import CartOverview from "../features/cart/CartOverview";
 import Header from "./Header";
-import { Loader } from "../features/menu/Menu";
+import Loader from "./Loader";
 
 function AppLayout() {
   const navigate = useNavigate();
