@@ -31,7 +31,7 @@ export const fetchAddress = createAsyncThunk(
 const initialState = {
   username: "",
   status: "idle",
-  postion: {},
+  position: {},
   address: "",
   error: "",
 };
@@ -50,7 +50,7 @@ const userSlice = createSlice({
     });
     builder.addCase(fetchAddress.fulfilled, (state, action) => {
       state.address = action.payload.address;
-      state.postion = action.payload.position;
+      state.position = action.payload.position;
       state.status = "idle";
     });
     builder.addCase(fetchAddress.rejected, (state, action) => {
