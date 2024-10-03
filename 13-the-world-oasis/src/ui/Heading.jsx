@@ -7,7 +7,6 @@ const Heading = styled.h1`
       font-size: 5rem;
       font-weight: 900;
       text-align: center;
-      background-color: var(--color-indigo-700);
     `}
   ${(props) =>
     props.as === "h3" &&
@@ -19,4 +18,4 @@ const Heading = styled.h1`
     `}
 `;
 
-export default Heading
+export default Heading;
