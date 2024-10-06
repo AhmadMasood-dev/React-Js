@@ -43,12 +43,20 @@ const Discount = styled.div`
 `;
 
 function CabinRow({ cabin }) {
-  const { name, maxCapacity, regularPrice, discount, image, description } =
-    cabin;
+  const {
+    id: cabinId,
+    name,
+    maxCapacity,
+    regularPrice,
+    discount,
+    image,
+    description,
+  } = cabin;
 
   const queryClient = useQueryClient();
 
   const { isLoading: isDeleting, mutate } = useMutation({
+    mutationFn: deleteCabin,
     onSuccess: () => {
       toast.success("Cabin successfully deleted");
       queryClient.invalidateQueries({
@@ -65,10 +73,7 @@ function CabinRow({ cabin }) {
       <div>Fits up to {maxCapacity} guests</div>
       <Price>{formatCurrency(regularPrice)}</Price>
       <Discount>{formatCurrency(discount)}</Discount>
-      <button
-        onClick={() => mutate(deleteCabin(cabin.id))}
-        disabled={isDeleting}
-      >
+      <button onClick={() => mutate(cabinId)} disabled={isDeleting}>
         Delete
       </button>
     </TableRow>
