@@ -13,6 +13,7 @@ const StyledApplayout = styled.div`
 const Main = styled.main`
   background-color: var(--color);
   padding: 4rem 4.8rem 6.4rem;
+  overflow: scroll;
 `;
 
 const Container = styled.div`
@@ -29,7 +30,9 @@ function AppLayout() {
       <Header />
       <Sidebar />
       <Main>
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
       </Main>
     </StyledApplayout>
   );
