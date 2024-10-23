@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
-import { HiMiniEllipsisVertical } from "react-icons/hi2";
+import { HiEllipsisVertical } from "react-icons/hi2";
 import styled from "styled-components";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 
@@ -70,8 +70,10 @@ const MenusContext = createContext();
 function Menus({ children }) {
   const [openId, setOpenId] = useState("");
   const [position, setPosition] = useState(null);
+
   const close = () => setOpenId("");
   const open = setOpenId;
+
   return (
     <MenusContext.Provider
       value={{ openId, close, open, position, setPosition }}
@@ -83,23 +85,28 @@ function Menus({ children }) {
 
 function Toggle({ id }) {
   const { openId, close, open, setPosition } = useContext(MenusContext);
+
   function handleClick(e) {
     const rect = e.target.closest("button").getBoundingClientRect();
-    openId === "" || openId !== id ? open(id) : close();
     setPosition({
       x: window.innerWidth - rect.width - rect.x,
-      y: rect.height + rect.y + 8,
+      y: rect.y + rect.height + 8,
     });
+
+    openId === "" || openId !== id ? open(id) : close();
   }
+
   return (
     <StyledToggle onClick={handleClick}>
-      <HiMiniEllipsisVertical />
+      <HiEllipsisVertical />
     </StyledToggle>
   );
 }
+
 function List({ id, children }) {
   const { openId, position, close } = useContext(MenusContext);
   const ref = useOutsideClick(close);
+
   if (openId !== id) return null;
 
   return createPortal(
@@ -109,6 +116,7 @@ function List({ id, children }) {
     document.body
   );
 }
+
 function Button({ children, icon, onClick }) {
   const { close } = useContext(MenusContext);
 
@@ -116,6 +124,7 @@ function Button({ children, icon, onClick }) {
     onClick?.();
     close();
   }
+
   return (
     <li>
       <StyledButton onClick={handleClick}>
