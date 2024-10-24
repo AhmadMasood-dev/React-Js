@@ -1,4 +1,4 @@
-import { HiChevronLeft } from "react-icons/hi2";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { PAGE_SIZE } from "../utils/constants";
@@ -58,7 +58,6 @@ const PaginationButton = styled.button`
   }
 `;
 
-
 function Pagination({ count }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -66,37 +65,43 @@ function Pagination({ count }) {
     ? 1
     : Number(searchParams.get("page"));
 
-  const PageCount = Math.ceil(count / [PAGE_SIZE]);
+  const pageCount = Math.ceil(count / PAGE_SIZE);
 
-  function nextage() {
-    const next = currentPage === PageCount ? currentPage : currentPage + 1;
+  function nextPage() {
+    const next = currentPage === pageCount ? currentPage : currentPage + 1;
+
     searchParams.set("page", next);
     setSearchParams(searchParams);
   }
-  function prevage() {
+
+  function prevPage() {
     const prev = currentPage === 1 ? currentPage : currentPage - 1;
+
     searchParams.set("page", prev);
     setSearchParams(searchParams);
   }
-  if (PageCount <= 1) return null;
+
+  if (pageCount <= 1) return null;
+
   return (
     <StyledPagination>
       <p>
         showing <span>{(currentPage - 1) * PAGE_SIZE + 1} </span>to{" "}
         <span>
-          {currentPage === PageCount ? count : currentPage * PAGE_SIZE}{" "}
+          {currentPage === pageCount ? count : currentPage * PAGE_SIZE}{" "}
         </span>
         of <span>{count} </span>result
       </p>
       <Buttons>
-        <PaginationButton onClick={prevage} disabled={currentPage === 1}>
+        <PaginationButton onClick={prevPage} disabled={currentPage === 1}>
           <HiChevronLeft /> <span>Prevuious</span>
         </PaginationButton>
         <PaginationButton
-          onClick={nextage}
-          disabled={currentPage === PageCount}
+          onClick={nextPage}
+          disabled={currentPage === pageCount}
         >
-          <HiChevronLeft /> <span>Next</span>
+          <HiChevronRight />
+          <span>Next</span>
         </PaginationButton>
       </Buttons>
     </StyledPagination>
