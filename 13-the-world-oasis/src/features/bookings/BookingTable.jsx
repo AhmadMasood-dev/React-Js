@@ -8,7 +8,7 @@ import { useBookings } from "./useBookings";
 import Pagination from "../../ui/Pagination";
 
 function BookingTable() {
-  const { bookings, isLoading,count } = useBookings();
+  const { bookings, isLoading, count } = useBookings();
 
   if (isLoading) return <Spinner />;
 
@@ -23,9 +23,8 @@ function BookingTable() {
           <div>Dates</div>
           <div>Status</div>
           <div>Amount</div>
-          <div></div>
         </Table.Header>
- 
+
         <Table.Body
           data={bookings}
           render={(booking) => (
