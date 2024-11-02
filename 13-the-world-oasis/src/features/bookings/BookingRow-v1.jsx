@@ -7,7 +7,7 @@ import Table from "../../ui/Table";
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import Menus from "../../ui/Menus";
-import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from "react-icons/hi2";
+import { HiEye } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
 const Cabin = styled.div`
@@ -84,40 +84,22 @@ function BookingRow({
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
       <Menus.Menu>
-        <Menus.Toggle id={bookingId} />
-        <Menus.List id={bookingId}>
-          <Menus.Button
-            icon={<HiEye />}
-            onClick={() => navigate(`/bookings/${bookingId}`)}
-          >
-            Set Details
-          </Menus.Button>
-          {status === "unconfirmed" && (
+        <Menus.Toggle id={bookingId}>
+          <Menus.List id={bookingId}>
             <Menus.Button
-              icon={<HiArrowDownOnSquare />}
-              onClick={() => navigate(`/checkin/${bookingId}`)}
+              icon={<HiEye />}
+              onClick={
+                (() => navigate(`/bookings/${bookingId}`),
+                console.log("bookingId"))
+              }
             >
-              Check-in
+              See Details
             </Menus.Button>
-          )}
-          {status === "checked-in" && (
-            <Menus.Button
-              icon={<HiArrowUpOnSquare />}
-              onClick={() => {}}
-            >
-              Check-out
-            </Menus.Button>
-          )}
-        </Menus.List>
+          </Menus.List>
+        </Menus.Toggle>
       </Menus.Menu>
     </Table.Row>
   );
 }
 
 export default BookingRow;
-
-// icon={<HiEye/>}
-// onClick={
-//   (() => navigate(`/bookings/${bookingId}`),
-//   console.log("bookingId"))
-// }
