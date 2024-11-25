@@ -31,7 +31,7 @@ function ConfirmDelete({ resourceName, onConfirm, disabled, onCloseModal }) {
 
       <div>
         <Button
-          variatio="secondary"
+          variation="secondary"
           disabled={disabled}
           onClick={onCloseModal}
         >

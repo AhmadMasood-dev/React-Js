@@ -16,7 +16,7 @@ import {
   HiTrash,
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { useCheckout } from "../check-in-out/useCheckinout";
+import { useCheckout } from "../check-in-out/useCheckout";
 import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
@@ -62,7 +62,7 @@ function BookingRow({
 }) {
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
-  const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { deleteBooking } = useDeleteBooking();
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",
