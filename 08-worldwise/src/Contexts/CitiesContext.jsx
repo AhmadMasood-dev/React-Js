@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
 import { createContext } from "react";
-const BASE_URL = "http://localhost:9000";
+const BASE_URL = "https://ahmadmasood-dev.github.io/worldWiseJsonServer";
 
 const citiesContext = createContext();
 
@@ -67,7 +67,7 @@ function CitiesProvider({ children }) {
     async function fetchCities() {
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${BASE_URL}/cities`);
+        const res = await fetch(`${BASE_URL}/cities.json`);
         const data = await res.json();
 
         dispatch({ type: "cities/loading", payload: data });
@@ -82,17 +82,32 @@ function CitiesProvider({ children }) {
   }, []);
 
   async function getCity(id) {
-    if (Number(id) === currentCity.id) return;
+    // Prevent unnecessary fetch if the city is already loaded
+    if (String(id) === String(currentCity?.id)) return;
 
     dispatch({ type: "loading" });
     try {
-      const res = await fetch(`${BASE_URL}/cities/${id}`);
+      const res = await fetch(`${BASE_URL}/cities.json`);
       const data = await res.json();
-      dispatch({ type: "city/loaded", payload: data });
+
+      // Find the city by ID (fixed id usage)
+      const city = data.find((city) => city.id === id);
+
+      if (city) {
+        console.log("City Found:", city);
+        dispatch({ type: "city/loaded", payload: city }); // Dispatch the specific city, not all data
+      } else {
+        console.error("City not found");
+        dispatch({
+          type: "rejected",
+          payload: "City not found with the provided ID.",
+        });
+      }
     } catch (err) {
+      console.error("Error fetching city:", err);
       dispatch({
         type: "rejected",
-        payload: "there was an error in city loading data",
+        payload: "There was an error loading the city data.",
       });
     }
   }
@@ -100,35 +115,24 @@ function CitiesProvider({ children }) {
   async function createCity(newCity) {
     dispatch({ type: "loading" });
     try {
-      const res = await fetch(`${BASE_URL}/cities`, {
-        method: "POST",
-        body: JSON.stringify(newCity),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      dispatch({ type: "city/created", payload: data });
+      // Simulating ID generation for a new city
+      const id = Date.now().toString();
+      const cityWithId = { ...newCity, id };
+
+      dispatch({ type: "city/created", payload: cityWithId });
+      console.log("City added (UI only):", cityWithId);
     } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: "there was an error in creating a city",
-      });
+      dispatch({ type: "rejected", payload: "Error creating city" });
     }
   }
 
   async function deleteCity(id) {
     dispatch({ type: "loading" });
     try {
-      await fetch(`${BASE_URL}/cities/${id}`, {
-        method: "DELETE",
-      });
       dispatch({ type: "city/deleted", payload: id });
+      console.log(`City with ID ${id} deleted (UI only)`);
     } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: "there was an error in creating a city",
-      });
+      dispatch({ type: "rejected", payload: "Error deleting city" });
     }
   }
 

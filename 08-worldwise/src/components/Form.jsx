@@ -74,7 +74,7 @@ function Form() {
     return <Message message={"Start by clicking somewhere on the map"} />;
   if (geocodingError) return <Message message={geocodingError} />;
 
- async function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!cityName || !date) return;
 
@@ -86,9 +86,17 @@ function Form() {
       notes,
       position: { lat, lng },
     };
-    console.log(newCity);
-   await createCity(newCity);
-    navigate('/app/cities')
+    try {
+      console.log("Submitting City:", newCity);
+
+      // Wait for the city creation to complete
+      await createCity(newCity);
+
+      // Redirect after successful submission
+      navigate("/app/cities");
+    } catch (error) {
+      console.error("Error creating city:", error);
+    }
   }
   return (
     <form

@@ -12,11 +12,14 @@ const formatDate = (date) =>
 function CityItem({ city }) {
   const { currentCity, deleteCity } = useCities();
 
-  const { cityName, emoji, date, id, position } = city;
+  const { cityName, emoji, date, id, position } = city ?? {};
 
   function handleDelete(e) {
     e.preventDefault();
-    deleteCity(id);
+    if (!id) {
+      console.error("City ID is missing!");
+      return;
+    } else deleteCity(id);
   }
 
   return (
