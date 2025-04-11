@@ -1,1 +1,1 @@
-export const CITITES = "https://ahmadmasood-dev.github.io/worldWiseJsonServer";
+export const BASE_URL = "https://worldwisejson.vercel.app";

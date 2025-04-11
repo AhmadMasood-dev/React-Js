@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
 import { createContext } from "react";
-const BASE_URL = "https://ahmadmasood-dev.github.io/worldWiseJsonServer";
+import { BASE_URL } from "../data/data";
 
 const citiesContext = createContext();
 
@@ -67,8 +67,9 @@ function CitiesProvider({ children }) {
     async function fetchCities() {
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${BASE_URL}/cities.json`);
+        const res = await fetch(`${BASE_URL}/cities`);
         const data = await res.json();
+        console.log("Cities Loaded:", data);
 
         dispatch({ type: "cities/loading", payload: data });
       } catch (err) {

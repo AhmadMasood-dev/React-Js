@@ -5,12 +5,6 @@ import ProtectedRoutes from "./Pages/ProtectedRoutes";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-// import AppLayout from "./Pages/AppLayout";
-// import Homepage from "./Pages/Homepage";
-// import Pricing from "./Pages/Pricing";
-// import Product from "./Pages/Product";
-// import Login from "./Pages/Login";
-// import PageNotFound from "./Pages/PageNotFound";
 import CountriesList from "./components/CountriesList";
 import CityList from "./components/CityList";
 import City from "./components/City";
