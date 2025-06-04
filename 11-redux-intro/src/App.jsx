@@ -9,7 +9,9 @@ function App() {
 
   return (
     <div>
-      <h1>🏦 The React-Redux Bank ⚛️</h1>
+      <h1 className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg p-8 text-2xl text-blue-700 font-bold mb-6 text-center">
+        🏦 The React-Redux Bank ⚛️
+      </h1>
       {fullName === "" ? (
         <CreateCustomer />
       ) : (
